@@ -76,7 +76,7 @@
         <GridSplitter Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
                       Background="Green" Height="5" IsEnabled="True"/>
 
-        <StackPanel Grid.Row="2" Background="DeepSkyBlue"/>
+        <StackPanel Grid.Row="2" Background="Tan"/>
 
     </Grid>
 </Window>

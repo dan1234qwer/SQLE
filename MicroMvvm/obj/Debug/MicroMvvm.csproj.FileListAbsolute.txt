@@ -15,3 +15,8 @@ C:\Users\Dan\Desktop\SQLE\MicroMvvm\bin\Debug\MicroMvvm.pdb
 C:\Users\Dan\Desktop\SQLE\MicroMvvm\obj\Debug\MicroMvvm.csprojResolveAssemblyReference.cache
 C:\Users\Dan\Desktop\SQLE\MicroMvvm\obj\Debug\MicroMvvm.dll
 C:\Users\Dan\Desktop\SQLE\MicroMvvm\obj\Debug\MicroMvvm.pdb
+C:\Users\danhr\Desktop\SQLE\MicroMvvm\bin\Debug\MicroMvvm.dll
+C:\Users\danhr\Desktop\SQLE\MicroMvvm\bin\Debug\MicroMvvm.pdb
+C:\Users\danhr\Desktop\SQLE\MicroMvvm\obj\Debug\MicroMvvm.csprojResolveAssemblyReference.cache
+C:\Users\danhr\Desktop\SQLE\MicroMvvm\obj\Debug\MicroMvvm.dll
+C:\Users\danhr\Desktop\SQLE\MicroMvvm\obj\Debug\MicroMvvm.pdb
