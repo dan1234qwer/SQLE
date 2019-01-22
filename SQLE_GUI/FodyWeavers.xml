@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Weavers>
+  <Costura>
+    <Costura>
+      <Unmanaged32Assemblies>
+        MicroMvvm
+      </Unmanaged32Assemblies>
+      <Unmanaged64Assemblies>
+      </Unmanaged64Assemblies>
+    </Costura>
+  </Costura>
+</Weavers>

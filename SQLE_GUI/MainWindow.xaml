@@ -1,0 +1,82 @@
+﻿<Window x:Class="SQLE_GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SQLE_GUI"
+        xmlns:VM="clr-namespace:SQLE_GUI.VIEW_MODEL"
+        mc:Ignorable="d"
+        Title="SQLiteEditor" Height="350" Width="525" Icon="IMAGES/quill.ico">
+    <Window.DataContext>
+        <VM:PersonViewModel />
+    </Window.DataContext>
+    
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" Background="DeepSkyBlue"/>
+        <GridSplitter Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
+                      Background="Green" Height="5" IsEnabled="False"/>
+
+        <StackPanel Grid.Row="1" Background="SkyBlue">
+            <StackPanel Height="130" Background="Beige">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Create" Width="100" Margin="10"
+                            HorizontalAlignment="Left" Command="{Binding CreateCommand}"/>
+                    <Button Content="Read" Width="100" Margin="10"
+                            HorizontalAlignment="Left" Command="{Binding ReadCommand}"/>
+                    <Button Content="Update" Width="100" Margin="10" 
+                            HorizontalAlignment="Left" Command="{Binding UpdateCommand}"/>
+                    <Button Content="Delete" Width="100" Margin="10" 
+                            HorizontalAlignment="Left" Command="{Binding DeleteCommand}"/>
+                </StackPanel>
+
+                <Border BorderBrush="CadetBlue" BorderThickness="2" CornerRadius="5"
+                        Margin="10">
+                    <StackPanel Background="LightSalmon">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="FirstName" Width="100"/>
+                            <Label Content="LastName" Width="100"/>
+                            <Label Content="Age" Width="100"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Text="{Binding SelectedPerson.FirstName}" Width="100"/>
+                            <TextBox Text="{Binding SelectedPerson.LastName}" Width="100"/>
+                            <TextBox Text="{Binding SelectedPerson.Age}" Width="100"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+            
+            <StackPanel>
+                <ListView ItemsSource="{Binding PersonList}" 
+                          Height="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          ScrollViewer.CanContentScroll="True"
+                          SelectedItem="{Binding SelectedPerson}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding FirstName}" FontSize="20" />
+                                <Label Content="{Binding LastName}" FontSize="20" />
+                                <Label Content="{Binding Age}" FontSize="20" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+            
+        </StackPanel>
+        <GridSplitter Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
+                      Background="Green" Height="5" IsEnabled="True"/>
+
+        <StackPanel Grid.Row="2" Background="DeepSkyBlue"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,17 @@
+C:\DATA\LUCRU\_MVVM\MvvmExample\MicroMvvm\bin\Debug\MicroMvvm.dll
+C:\DATA\LUCRU\_MVVM\MvvmExample\MicroMvvm\bin\Debug\MicroMvvm.pdb
+C:\DATA\LUCRU\_MVVM\MvvmExample\MicroMvvm\obj\Debug\MicroMvvm.dll
+C:\DATA\LUCRU\_MVVM\MvvmExample\MicroMvvm\obj\Debug\MicroMvvm.pdb
+C:\DATA\LUCRU\_MVVM\SQLE\MicroMvvm\bin\Debug\MicroMvvm.dll
+C:\DATA\LUCRU\_MVVM\SQLE\MicroMvvm\bin\Debug\MicroMvvm.pdb
+C:\DATA\LUCRU\_MVVM\SQLE\MicroMvvm\obj\Debug\MicroMvvm.dll
+C:\DATA\LUCRU\_MVVM\SQLE\MicroMvvm\obj\Debug\MicroMvvm.pdb
+D:\PROJECTS\MVVM\SQLE\MicroMvvm\bin\Debug\MicroMvvm.dll
+D:\PROJECTS\MVVM\SQLE\MicroMvvm\bin\Debug\MicroMvvm.pdb
+D:\PROJECTS\MVVM\SQLE\MicroMvvm\obj\Debug\MicroMvvm.dll
+D:\PROJECTS\MVVM\SQLE\MicroMvvm\obj\Debug\MicroMvvm.pdb
+C:\Users\Dan\Desktop\SQLE\MicroMvvm\bin\Debug\MicroMvvm.dll
+C:\Users\Dan\Desktop\SQLE\MicroMvvm\bin\Debug\MicroMvvm.pdb
+C:\Users\Dan\Desktop\SQLE\MicroMvvm\obj\Debug\MicroMvvm.csprojResolveAssemblyReference.cache
+C:\Users\Dan\Desktop\SQLE\MicroMvvm\obj\Debug\MicroMvvm.dll
+C:\Users\Dan\Desktop\SQLE\MicroMvvm\obj\Debug\MicroMvvm.pdb
