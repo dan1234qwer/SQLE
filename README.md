@@ -1,0 +1,2 @@
+# SQLE
+SQLite editor
