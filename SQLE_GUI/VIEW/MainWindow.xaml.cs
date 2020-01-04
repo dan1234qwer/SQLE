@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SQLE_GUI
+namespace SQLE_GUI.VIEW
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

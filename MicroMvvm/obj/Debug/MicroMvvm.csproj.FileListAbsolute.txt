@@ -20,3 +20,14 @@ C:\Users\danhr\Desktop\SQLE\MicroMvvm\bin\Debug\MicroMvvm.pdb
 C:\Users\danhr\Desktop\SQLE\MicroMvvm\obj\Debug\MicroMvvm.csprojResolveAssemblyReference.cache
 C:\Users\danhr\Desktop\SQLE\MicroMvvm\obj\Debug\MicroMvvm.dll
 C:\Users\danhr\Desktop\SQLE\MicroMvvm\obj\Debug\MicroMvvm.pdb
+D:\SQLE\MicroMvvm\bin\Debug\MicroMvvm.dll
+D:\SQLE\MicroMvvm\bin\Debug\MicroMvvm.pdb
+D:\SQLE\MicroMvvm\obj\Debug\MicroMvvm.csprojAssemblyReference.cache
+D:\SQLE\MicroMvvm\obj\Debug\MicroMvvm.csproj.CoreCompileInputs.cache
+D:\SQLE\MicroMvvm\obj\Debug\MicroMvvm.dll
+D:\SQLE\MicroMvvm\obj\Debug\MicroMvvm.pdb
+D:\PROJECTS\SQLE\MicroMvvm\bin\Debug\MicroMvvm.dll
+D:\PROJECTS\SQLE\MicroMvvm\bin\Debug\MicroMvvm.pdb
+D:\PROJECTS\SQLE\MicroMvvm\obj\Debug\MicroMvvm.csproj.CoreCompileInputs.cache
+D:\PROJECTS\SQLE\MicroMvvm\obj\Debug\MicroMvvm.dll
+D:\PROJECTS\SQLE\MicroMvvm\obj\Debug\MicroMvvm.pdb
