@@ -8,6 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("fodyweavers.xml")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("data/images/delete_db.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("data/images/down_db.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("data/images/new_db.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("data/images/tick_db.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("data/images/up_db.png")]
 
 

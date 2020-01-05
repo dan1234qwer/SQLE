@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:SQLE_GUI"
              StartupUri="VIEW/MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DATA/RESOURCES/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -96,7 +96,8 @@ namespace SQLE_GUI.VIEW_MODEL
             if (PersonList == null)
                 return;
 
-            PersonList.Add(new Person { FirstName = "newFirstNdd", LastName = "newLastNdd", Age = 232 });
+            //PersonList.Add(new Person { FirstName = "newFirstNdd", LastName = "newLastNdd", Age = 232 });
+            //SelectedPerson = 
         }
 
 

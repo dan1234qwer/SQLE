@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SQLE_GUI"
         xmlns:VM="clr-namespace:SQLE_GUI.VIEW_MODEL"
         mc:Ignorable="d"
-        Title="SQLiteEditor" Height="350" Width="525" Icon="../IMAGES/quill.ico">
+        Title="SQLiteEditor" Height="350" Width="525" Icon="../DATA/IMAGES/quill.ico">
     <Window.DataContext>
         <VM:PersonViewModel />
     </Window.DataContext>
@@ -19,74 +19,90 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Background="DeepSkyBlue" Orientation="Horizontal">
-            <Button Content="New DB" Margin="5" Command="{Binding NewDBCommand}"/>
-            <Button Content="Open DB" Margin="5" Command="{Binding OpenDBCommand}"/>
-            <Button Content="Save DB" Margin="5" Command="{Binding SaveDBCommand}"/>
+        <StackPanel Grid.Row="0" Background="SkyBlue" Orientation="Horizontal">
+            <Button Content="New DB" Margin="5,5,5,10" Command="{Binding NewDBCommand}"
+                    Style="{StaticResource NewProj}"/>
+            <Button Content="Open DB" Margin="5,5,5,10" Command="{Binding OpenDBCommand}"
+                    Style="{StaticResource OpenProj}"/>
+            <Button Content="Save DB" Margin="5,5,5,10" Command="{Binding SaveDBCommand}"
+                    Style="{StaticResource SaveProj}"/>
         </StackPanel>
         <GridSplitter Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
                       Background="Green" Height="5" IsEnabled="False"/>
 
-        <StackPanel Grid.Row="1" Background="SkyBlue">
-            <StackPanel Height="130" Background="Beige">
-                <StackPanel Orientation="Horizontal">
-                    <Button Content="Create" Width="100" Margin="10"
+        <TabControl Grid.Row="1" Background="SkyBlue">
+            <TabItem x:Name="TabItem_View1" Header="TabItem_View1" FontSize="20">
+
+                <StackPanel Grid.Row="1" Background="SkyBlue">
+                    <StackPanel Height="130" Background="Beige">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Create" Width="100" Margin="10"
                             HorizontalAlignment="Left" Command="{Binding CreateCommand}"/>
-                    <Button Content="Read" Width="100" Margin="10"
+                            <Button Content="Read" Width="100" Margin="10"
                             HorizontalAlignment="Left" Command="{Binding ReadCommand}"/>
-                    <Button Content="Update" Width="100" Margin="10" 
+                            <Button Content="Update" Width="100" Margin="10" 
                             HorizontalAlignment="Left" Command="{Binding UpdateCommand}"/>
-                    <Button Content="Delete" Width="100" Margin="10" 
+                            <Button Content="Delete" Width="100" Margin="10" 
                             HorizontalAlignment="Left" Command="{Binding DeleteCommand}"/>
-                </StackPanel>
+                        </StackPanel>
 
-                <Border BorderBrush="CadetBlue" BorderThickness="2" CornerRadius="5"
+                        <Border BorderBrush="CadetBlue" BorderThickness="2" CornerRadius="5"
                         Margin="10">
-                    <StackPanel Background="LightSalmon">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="FirstName" Width="100"/>
-                            <Label Content="LastName" Width="100"/>
-                            <Label Content="Age" Width="100"/>
-                        </StackPanel>
+                            <StackPanel Background="LightSalmon">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="FirstName" Width="100"/>
+                                    <Label Content="LastName" Width="100"/>
+                                    <Label Content="Age" Width="100"/>
+                                </StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Text="{Binding SelectedPerson.FirstName}" Width="100"/>
-                            <TextBox Text="{Binding SelectedPerson.LastName}" Width="100"/>
-                            <TextBox Text="{Binding SelectedPerson.Age}" Width="100"/>
-                        </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="{Binding SelectedPerson.FirstName}" Width="100"/>
+                                    <TextBox Text="{Binding SelectedPerson.LastName}" Width="100"/>
+                                    <TextBox Text="{Binding SelectedPerson.Age}" Width="100"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
                     </StackPanel>
-                </Border>
 
-            </StackPanel>
-            
-            <StackPanel>
-                <ListView ItemsSource="{Binding PersonList}" 
+                    <StackPanel>
+                        <ListView ItemsSource="{Binding PersonList}" 
                           Height="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible"
                           ScrollViewer.CanContentScroll="True"
                           SelectedItem="{Binding SelectedPerson}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Label Content="{Binding FirstName}" FontSize="20" Width="100"/>
-                                <Separator BorderThickness="5" BorderBrush="Blue">
-                                    <Separator.LayoutTransform>
-                                        <RotateTransform Angle="90" />
-                                    </Separator.LayoutTransform>
-                                </Separator>
-                                <Label Content="{Binding LastName}" FontSize="20" Width="100"/>
-                                <Separator BorderThickness="5" BorderBrush="Blue">
-                                    <Separator.LayoutTransform>
-                                        <RotateTransform Angle="90" />
-                                    </Separator.LayoutTransform>
-                                </Separator>
-                                <Label Content="{Binding Age}" FontSize="20" Width="100"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackPanel>
-            
-        </StackPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{Binding FirstName}" FontSize="20" Width="200"/>
+                                        <Separator BorderThickness="5" BorderBrush="Blue">
+                                            <Separator.LayoutTransform>
+                                                <RotateTransform Angle="90" />
+                                            </Separator.LayoutTransform>
+                                        </Separator>
+                                        <Label Content="{Binding LastName}" FontSize="20" Width="200"/>
+                                        <Separator BorderThickness="5" BorderBrush="Blue">
+                                            <Separator.LayoutTransform>
+                                                <RotateTransform Angle="90" />
+                                            </Separator.LayoutTransform>
+                                        </Separator>
+                                        <Label Content="{Binding Age}" FontSize="20" Width="200"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+
+                </StackPanel>
+
+            </TabItem>
+            <TabItem x:Name="TabItem_View2" Header="TabItem_View2"  FontSize="20">
+
+            </TabItem>
+        </TabControl>
+        
+        
+
+        
         <GridSplitter Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
                       Background="Green" Height="5" IsEnabled="True"/>
 

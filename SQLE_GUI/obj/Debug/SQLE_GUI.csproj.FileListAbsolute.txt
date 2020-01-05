@@ -111,3 +111,5 @@ D:\PROJECTS\SQLE\SQLE_GUI\obj\Debug\SQLE_GUI.csproj.CoreCompileInputs.cache
 D:\PROJECTS\SQLE\SQLE_GUI\obj\Debug\SQLE_GUI.csproj.CopyComplete
 D:\PROJECTS\SQLE\SQLE_GUI\obj\Debug\SQLE_GUI.exe
 D:\PROJECTS\SQLE\SQLE_GUI\obj\Debug\SQLE_GUI.pdb
+D:\PROJECTS\SQLE\SQLE_GUI\obj\Debug\App.baml
+D:\PROJECTS\SQLE\SQLE_GUI\obj\Debug\DATA\RESOURCES\Styles.baml
