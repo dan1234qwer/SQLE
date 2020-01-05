@@ -40,12 +40,28 @@ namespace SQLE_GUI.VIEW_MODEL
         {
             if (PersonList == null)
             {
-                PersonList = new ObservableCollection<Person>()
+                if (System.Diagnostics.Debugger.IsAttached == true)
+                // code or timeout value when running tests in debug mode
                 {
-                    new Person() { FirstName = "User1", LastName = "User1_L", Age = 10 },
-                    new Person() { FirstName = "User2", LastName = "User2_L", Age = 20 },
-                    new Person() { FirstName = "User3", LastName = "User3_L", Age = 30 },
-                };
+                    PersonList = new ObservableCollection<Person>()
+                    {
+                        new Person() { FirstName = "User1", LastName = "User1_L", Age = 10 },
+                        new Person() { FirstName = "User2", LastName = "User2_L", Age = 20 },
+                        new Person() { FirstName = "User3", LastName = "User3_L", Age = 30 },
+                    };
+                }
+                else
+                // non debug mode
+                {
+                    PersonList = new ObservableCollection<Person>()
+                    {
+                        //new Person() { FirstName = "User1", LastName = "User1_L", Age = 10 },
+                        //new Person() { FirstName = "User2", LastName = "User2_L", Age = 20 },
+                        //new Person() { FirstName = "User3", LastName = "User3_L", Age = 30 },
+                    };
+                }
+
+                
             }
         }
         #endregion
@@ -122,6 +138,78 @@ namespace SQLE_GUI.VIEW_MODEL
         }
 
 
+        public RelayCommand NewDBCommand { get { return new RelayCommand(NewDBCommand_Execute, Can_NewDBCommand_Execute); } }
+
+        private bool Can_NewDBCommand_Execute()
+        {
+            return true;
+        }
+
+        private void NewDBCommand_Execute()
+        {
+            if (New_DB_Dialog() != true) { return; }
+
+            PersonList.Clear();
+
+            Create_Empty_DataBase();
+
+        }
+
+        private bool New_DB_Dialog()
+        {
+            bool ret = false;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "SQLite file |*.db; *.sqlite; *.sl3";
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                FileInfo fi = new FileInfo(saveFileDialog.FileName);
+
+                //db_name = fi.FullName;
+                config.DatabaseFile = fi.FullName;
+
+                ret = true;
+            }
+            else
+            {
+                ret = false;
+            }
+            return ret;
+        }
+
+        private void Create_Empty_DataBase()
+        {
+            // creating Users table
+            using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand())
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+
+                    SQLiteHelper sqlite = new SQLiteHelper(cmd);
+                    SQLiteTable table = new SQLiteTable(config.TableName_Users);
+
+                    // delete table
+                    sqlite.DropTable(config.TableName_Users);
+
+
+                    SQLiteColumn column_ID = new SQLiteColumn(config.UsersCol0, ColType.Integer, true, true, true, "");
+                    SQLiteColumn column_FirstName = new SQLiteColumn(config.UsersCol1, ColType.Text);
+                    SQLiteColumn column_LastName = new SQLiteColumn(config.UsersCol2, ColType.Text);
+                    SQLiteColumn column_Age = new SQLiteColumn(config.UsersCol3, ColType.Integer);
+                    table.Columns.Add(column_ID);
+                    table.Columns.Add(column_FirstName);
+                    table.Columns.Add(column_LastName);
+                    table.Columns.Add(column_Age);
+
+                    sqlite.CreateTable(table);
+
+                    conn.Close();
+                }
+            }
+
+        }
+
         public RelayCommand OpenDBCommand { get { return new RelayCommand(OpenDBCommand_Execute, Can_OpenDBCommand_Execute); } }
 
         private bool Can_OpenDBCommand_Execute()
@@ -133,7 +221,9 @@ namespace SQLE_GUI.VIEW_MODEL
         {
             if (Open_DB_Dialog() != true) { return; }
 
-            //DB_Equipment_2_Item_Settings();
+            PersonList.Clear();
+
+            Read_From_DataBase();
 
         }
 
@@ -145,17 +235,10 @@ namespace SQLE_GUI.VIEW_MODEL
             if (openFileDialog.ShowDialog() == true)
             {
                 FileInfo fi = new FileInfo(openFileDialog.FileName);
-                //db_name = fi.FullName;
-                //db_path = fi.DirectoryName;
-                //projName.Text = fi.Name;
-                //projName.Foreground = Brushes.DodgerBlue;
+
+                config.DatabaseFile = fi.FullName;
                 ret = true;
 
-                // create obj
-                //SQLiteHelper sqlite = new SQLiteHelper();
-
-                // set DB name
-                //sqlite.DatabaseFile = fi.FullName;  // "racdb.db";
             }
             else
             {
@@ -165,44 +248,7 @@ namespace SQLE_GUI.VIEW_MODEL
             return ret;
         }
 
-#if false
-        private void DB_Equipment_2_Item_Settings()
-        {
-            List<ListWithName> eqList = new List<ListWithName>();
-            //ITEM.Equipment_class equipment = new ITEM.Equipment_class();
-            //ITEM item = new ITEM();
-            string key = String.Empty;
 
-            // create DB obj
-            SQLiteHelper sqlite = new SQLiteHelper();
-
-            // set DB name
-            sqlite.DatabaseFile = db_name;  // "racdb.db";
-
-            // iterate through Equipments table and get ch_ID        
-            eqList = sqlite.GetEntries("Equipments");
-
-            //  LIST TYPE
-            //  1 = TextBox  2 = ListBox  3 = CheckBox  4 = TextBlock
-
-            foreach (ListWithName eql in eqList)
-            {
-                var item = new ITEM();
-                item.Setting_List = new ObservableCollection<ITEM.Setting>();
-
-                item.Setting_List.Add(new ITEM.Setting { Field = "Equipment ID", Value_string = eql.SubItems[0].ToString(), List_type = 4 });
-                item.Setting_List.Add(new ITEM.Setting { Field = "Equipment Name", Value_string = eql.SubItems[1].ToString(), List_type = 4 });
-                item.Setting_List.Add(new ITEM.Setting { Field = "Equipment Process", Value_string = eql.SubItems[2].ToString(), List_type = 4 });
-                item.Setting_List.Add(new ITEM.Setting { Field = "Equipment ChannelId", Value_string = eql.SubItems[3].ToString(), List_type = 4 });
-                item.Setting_List.Add(new ITEM.Setting { Field = "Equipment Description", Value_string = eql.SubItems[4].ToString(), List_type = 1 });
-                item.Setting_List.Add(new ITEM.Setting { Field = "Equipment Active", Value_string = eql.SubItems[5].ToString(), List_type = 4 });
-
-                // add key to dictionary
-                key = eql.SubItems[1].ToString();
-                dictionary.Add(key, item);
-            }
-        }
-#endif 
         private bool TestConnection()
         {
             try
@@ -232,7 +278,7 @@ namespace SQLE_GUI.VIEW_MODEL
         {
             if (Save_DB_Dialog() != true) { return; }
 
-            //Item_Settings_2_DB_Equipment();
+            Write_To_DataBase();
         }
 
         private bool Save_DB_Dialog()
@@ -247,7 +293,6 @@ namespace SQLE_GUI.VIEW_MODEL
                 //db_name = fi.FullName;
                 config.DatabaseFile = fi.FullName;
 
-                Create_Empty_DataBase(fi.Name);
                 ret = true;
             }
             else
@@ -257,7 +302,7 @@ namespace SQLE_GUI.VIEW_MODEL
             return ret;
         }
 
-        private void Create_Empty_DataBase(string DB_name)
+        private void Create_Empty_DataBase_old()
         {
             //SQLiteHelper sqlite = new SQLiteHelper(new SQLiteCommand(config.DataSource));
 
@@ -294,100 +339,107 @@ namespace SQLE_GUI.VIEW_MODEL
                 }
             }
 
-
-
-            //sqlite..DatabaseFile = DB_name;
-            //sqlite.CreateDatabase();
-
-            //DataTable channel = new DataTable();
-            //channel.TableName = "Channel";
-            //channel.PrimaryKey = new DataColumn[] { channel.Columns["ID"] };
-            //channel.Columns.Add(new DataColumn { ColumnName = "Type", DataType = typeof(String), AllowDBNull = false });
-            //channel.Columns.Add(new DataColumn { ColumnName = "Description", DataType = typeof(String), AllowDBNull = true });
-            //channel.Columns.Add(new DataColumn { ColumnName = "IP", DataType = typeof(String), AllowDBNull = true });
-            //channel.Columns.Add(new DataColumn { ColumnName = "PORT", DataType = typeof(String), AllowDBNull = true });
-            //channel.Columns.Add(new DataColumn { ColumnName = "BAUDRATE", DataType = typeof(Int32), AllowDBNull = true });
-            //channel.Columns.Add(new DataColumn { ColumnName = "DATABITS", DataType = typeof(Int32), AllowDBNull = true });
-            //channel.Columns.Add(new DataColumn { ColumnName = "STOPBITS", DataType = typeof(Int32), AllowDBNull = true });
-            //channel.Columns.Add(new DataColumn { ColumnName = "PARITY", DataType = typeof(String), AllowDBNull = true });
-            //channel.Columns.Add(new DataColumn { ColumnName = "FLOWCTRL", DataType = typeof(String), AllowDBNull = true });
-            //channel.Columns.Add(new DataColumn { ColumnName = "RTSCONTROL", DataType = typeof(String), AllowDBNull = true });
-            //sqlite.CreateTable(channel);
-
-
-
-
         }
 
-#if false
-        private void Item_Settings_2_DB_Equipment()
+        private void Write_To_DataBase()
         {
-            ITEM item = new ITEM();
-            EntryList entry = new EntryList();
-
-            string eq_id = String.Empty;
-            string eq_name = String.Empty;
-            string eq_process = String.Empty;
-            string eq_channelid = String.Empty;
-            string eq_description = String.Empty;
-            string eq_active = String.Empty;
-
-            //ITEM.Equipment_class equipment = new ITEM.Equipment_class();
-
-            SQLiteHelper sqlite = new SQLiteHelper();
-            sqlite.DatabaseFile = db_name;
-
-            foreach (string key in dictionary.Keys)
+            // creating Users table
+            using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
             {
-                //item = new ITEM();
-                item = dictionary[key];
-
-                foreach (ITEM.Setting sett in item.Setting_List)
+                using (SQLiteCommand cmd = new SQLiteCommand())
                 {
-                    if (sett.Field.Contains("Equipment ID") == true)
-                    {
-                        eq_id = sett.Value_string;
-                    }
+                    conn.Open();
+                    cmd.Connection = conn;
 
-                    if (sett.Field.Contains("Equipment Name") == true)
-                    {
-                        eq_name = sett.Value_string;
-                    }
+                    SQLiteHelper sqlite = new SQLiteHelper(cmd);
+                    SQLiteTable table = new SQLiteTable(config.TableName_Users);
 
-                    if (sett.Field.Contains("Equipment Process") == true)
-                    {
-                        eq_process = sett.Value_string;
-                    }
+                    // delete table
+                    sqlite.DropTable(config.TableName_Users);
 
-                    if (sett.Field.Contains("Equipment ChannelId") == true)
-                    {
-                        eq_channelid = (sett.Value_string == "") ? "0" : sett.Value_string;
-                    }
 
-                    if (sett.Field.Contains("Equipment Description") == true)
-                    {
-                        eq_description = sett.Value_string;
-                    }
+                    SQLiteColumn column_ID = new SQLiteColumn(config.UsersCol0, ColType.Integer, true, true, true, "");
+                    SQLiteColumn column_FirstName = new SQLiteColumn(config.UsersCol1, ColType.Text);
+                    SQLiteColumn column_LastName = new SQLiteColumn(config.UsersCol2, ColType.Text);
+                    SQLiteColumn column_Age = new SQLiteColumn(config.UsersCol3, ColType.Integer);
+                    table.Columns.Add(column_ID);
+                    table.Columns.Add(column_FirstName);
+                    table.Columns.Add(column_LastName);
+                    table.Columns.Add(column_Age);
 
-                    if (sett.Field.Contains("Equipment Active") == true)
-                    {
-                        eq_active = sett.Value_string;
-                    }
+                    sqlite.CreateTable(table);
+
+                    conn.Close();
                 }
-
-                // create entry in DB for table Equipment
-                entry = new EntryList();
-                entry.ColumnName = new List<string> { "ID", "Name", "Process", "ChannelId", "Description", "Active" };
-                entry.Content = new List<string> { eq_id, eq_name, eq_process, eq_channelid,
-                    eq_description, eq_active };
-                entry.DbType = new List<DbType>() { DbType.Int32, DbType.String, DbType.String, DbType.Int32,
-                    DbType.String, DbType.Int32 };
-                sqlite.CreateEntry("Equipments", entry);
             }
+
+            // populating Users table
+            using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand())
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+
+                    SQLiteHelper sqlite = new SQLiteHelper(cmd);
+
+                    Dictionary<string, object> sqlite_dic = new Dictionary<string, object>();
+
+                    foreach (Person person in PersonList)
+                    {
+                        sqlite_dic.Add(config.UsersCol1, person.FirstName);
+                        sqlite_dic.Add(config.UsersCol2, person.LastName);
+                        sqlite_dic.Add(config.UsersCol3, person.Age);
+
+                        sqlite.Insert(config.TableName_Users, sqlite_dic);
+                        sqlite_dic.Clear();
+                    }
+
+                   conn.Close();
+                }
+            }
+
+        }
+
+        private void Read_From_DataBase()
+        {
+            // read Users table
+            using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand())
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+
+                    SQLiteHelper sqlite = new SQLiteHelper(cmd);
+
+                    DataTable personTable = new DataTable();
+                    personTable.Columns.Add(new DataColumn { ColumnName = "ID", DataType = typeof(Int32) });
+                    personTable.Columns.Add(new DataColumn { ColumnName = "FirstName", DataType = typeof(String) } );
+                    personTable.Columns.Add(new DataColumn { ColumnName = "LastName", DataType = typeof(String) });
+                    personTable.Columns.Add(new DataColumn { ColumnName = "Age", DataType = typeof(Int32) });
+
+                    string cmd_get_table = "SELECT * FROM " + config.TableName_Users;
+
+                    personTable = sqlite.Select(cmd_get_table);
+
+
+                    foreach(DataRow row in personTable.Rows)
+                    {
+                        Person person = new Person();
+                        person.FirstName = row.Field<string>("FirstName");
+                        person.LastName = row.Field<string>("LastName");
+                        person.Age = Convert.ToInt32(row.Field<Int64>("Age"));
+                        PersonList.Add(person);
+                    }
+
+                    conn.Close();
+                }
+            }
+
         }
 
 
-#endif
         #endregion
 
 

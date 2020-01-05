@@ -20,6 +20,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Background="DeepSkyBlue" Orientation="Horizontal">
+            <Button Content="New DB" Margin="5" Command="{Binding NewDBCommand}"/>
             <Button Content="Open DB" Margin="5" Command="{Binding OpenDBCommand}"/>
             <Button Content="Save DB" Margin="5" Command="{Binding SaveDBCommand}"/>
         </StackPanel>
@@ -66,9 +67,19 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="{Binding FirstName}" FontSize="20" />
-                                <Label Content="{Binding LastName}" FontSize="20" />
-                                <Label Content="{Binding Age}" FontSize="20" />
+                                <Label Content="{Binding FirstName}" FontSize="20" Width="100"/>
+                                <Separator BorderThickness="5" BorderBrush="Blue">
+                                    <Separator.LayoutTransform>
+                                        <RotateTransform Angle="90" />
+                                    </Separator.LayoutTransform>
+                                </Separator>
+                                <Label Content="{Binding LastName}" FontSize="20" Width="100"/>
+                                <Separator BorderThickness="5" BorderBrush="Blue">
+                                    <Separator.LayoutTransform>
+                                        <RotateTransform Angle="90" />
+                                    </Separator.LayoutTransform>
+                                </Separator>
+                                <Label Content="{Binding Age}" FontSize="20" Width="100"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>

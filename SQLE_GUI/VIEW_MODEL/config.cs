@@ -18,6 +18,10 @@ namespace SQLE_GUI.VIEW_MODEL
 
 
         public static string TableName_Users = "Users";
+        public static string UsersCol0 = "ID";
+        public static string UsersCol1 = "FirstName";
+        public static string UsersCol2 = "LastName";
+        public static string UsersCol3 = "Age";
     }
 }
 

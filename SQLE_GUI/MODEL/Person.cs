@@ -11,7 +11,7 @@ namespace SQLE_GUI.MODEL
         #region Members
         private string _FirstName;
         private string _LastName;
-        private int _Age;
+        private Int32 _Age;
         #endregion
 
 
@@ -42,7 +42,7 @@ namespace SQLE_GUI.MODEL
             }
         }
 
-        public int Age
+        public Int32 Age
         {
             get { return _Age; }
             set
